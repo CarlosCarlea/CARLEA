@@ -1,0 +1,21 @@
+CARLÉA 3.4.0 — VALIDACIÓN LOCAL
+Fecha: 22 de septiembre de 2026
+Base: CARLÉA 3.3.2 Cloudflare Directo
+
+RESULTADOS EJECUTADOS
+[PASS] tests/static_check.mjs
+[PASS] tests/integral_3_4.test.mjs — 5/5
+[PASS] tests/membership.test.mjs — 7/7
+[PASS] tests/cloudflare.test.mjs — 5/5
+[PASS] node --check para js/*.js y _worker.js
+[PASS] Saneamiento estructural SQL: pares $$, BEGIN/COMMIT, referencias corregidas
+[PASS] No aparece service_role en frontend
+[PASS] Logo oficial sin modificación: SHA-256 c4f9ebcb23ba302dd0e2ff722706fc365c3cd49c5c5edd3bf09114c0c1bb15c3
+
+NO EJECUTADO EN ESTE ENTORNO
+- Integración real de la migración 3.4 contra PostgreSQL/Supabase: no hay PGlite/PostgreSQL local instalado.
+- Smoke test de navegador Playwright: Playwright no está instalado.
+- Pruebas contra el proyecto Supabase real de producción: no se modificó el backend remoto desde este paquete.
+
+CONDICIÓN DE DESPLIEGUE
+Aplicar primero la migración 20260922123000_integral_carlea_3_4.sql en STAGING, validar el flujo completo y luego publicar el frontend en Cloudflare Pages.
