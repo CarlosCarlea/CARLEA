@@ -1,0 +1,57 @@
+DOCUMENTO HISTÓRICO. NO SEGUIR ESTAS INSTRUCCIONES PARA LA REVISIÓN 3.2.
+CARLÉA 3.1 MVP — SUSCRIPCIÓN GLOBAL PARA PRUEBAS
+21 de septiembre de 2026
+
+IMPORTANTE
+Esta versión cambia Premium y Diamante de planes por creadora a planes globales para toda CARLÉA.
+No subas este paquete sobre producción hasta aplicar y verificar primero docs/MIGRACION_CARLEA_3_1_GLOBAL.sql en un entorno controlado.
+La base de producción no fue modificada durante la preparación de este ZIP.
+
+CÓMO SUBIR
+1. Descomprime este ZIP.
+2. En el MISMO sitio Netlify que utilizas, sube la carpeta cuyo contenido directo es index.html, _redirects, styles.css, assets y js.
+3. No subas una carpeta que contenga otra carpeta antes de index.html.
+4. Conserva tu dominio actual. Esta entrega no creó otro sitio ni cambió el dominio.
+5. Abre la web en HTTPS y actualiza sin caché. Las cuentas existentes siguen en la misma base CARLÉA; puede ser necesario iniciar sesión de nuevo.
+No abras index.html mediante file://: los módulos y las llamadas al servidor requieren alojamiento HTTP/HTTPS.
+
+BASE DE DATOS
+La base CARLÉA de producción no fue modificada. SENDA/AMILECAP tampoco se tocó.
+docs/CAMBIOS_BASE_DATOS.sql es únicamente el historial de la versión 3.0 y NO debe ejecutarse nuevamente.
+docs/MIGRACION_CARLEA_3_1_GLOBAL.sql contiene la migración nueva; debe revisarse y probarse antes de aplicarla a producción.
+La migración conserva cuentas, conversaciones, perfiles y experiencias, y convierte el mejor plan vigente o solicitado de cada usuario en una suscripción global.
+Los valores técnicos heredados se conservan: essential = Premium; premium = Diamante. Las nuevas suscripciones globales usan premium/diamond y tienen fecha de vencimiento.
+
+QUÉ INCLUYE
+- Logo original negro y dorado, fuente Inter local y navegación móvil.
+- Galería inicial: Majo, Emma, Alisson y Lorena.
+- Gratis, Premium y Diamante con acceso validado por el servidor.
+- Perfil personal editable; biografía, foto y preferencias comerciales.
+- Perfil de creadora; biografía, enlace HTTPS, color, portada a partir de publicación pública aprobada y apertura de chat.
+- Publicaciones con tres audiencias y moderación antes de su visualización.
+- Suscripción global Premium o Diamante. Activación manual por administración, vigencia de un mes y cancelación.
+- Chat de texto y emojis; fotos, videos y voz solo cuando el cliente tiene Diamante. Realtime con actualización de respaldo.
+- Solicitud y aceptación de videollamada 1:1; permisos de cámara y micrófono; controles para apagarlos.
+- Administración: admisión/bloqueo, verificación privada de identidad, moderación, solicitudes de planes, reportes, datos legales, auditoría y diagnóstico.
+- Experiencias existentes y su flujo de confirmación/aceptación.
+
+ANTES DE USAR CON PERSONAS REALES
+A. DATOS LEGALES: ingresa como administrador > Administrar > Datos legales. Completa nombre/razón social, identificación, domicilio y correo PQR. Los registros y la carga de documentos están bloqueados hasta completar esos datos. Esto NO certifica cumplimiento de la normativa. Falta validar política final, obligaciones del operador, conservación, contratos con proveedores y tratamiento internacional.
+B. CREADORAS: Majo ya tenía una cuenta vinculada. Las demás necesitan correo propio, registro y verificación. No se inventaron correos, contraseñas o identidades. La insignia se concede únicamente al aprobar la revisión, no por aparecer en el catálogo.
+C. PUBLICACIONES: las creadoras necesitan identidad verificada para operar. Público, Premium y Diamante son audiencias de contenido globales. El objetivo de tres publicaciones nuevas al mes es editorial; no se ha programado una sanción automática por incumplirlo.
+D. PAGOS: no existe pasarela configurada ni cargo automático. El botón genera una solicitud, no una compra. El administrador debe verificar el pago por un canal autorizado y activar el plan. Se necesitan proveedor compatible con la actividad, cuenta de comercio y webhook firmado para automatizar.
+E. VIDEO: WebRTC 1:1 con STUN. Sin TURN no se garantiza conexión entre todas las redes. Los secretos TURN no deben colocarse en JavaScript público; se requiere un endpoint que entregue credenciales temporales. Hace falta probar dos dispositivos y dos redes en tu dominio real antes de ofrecerlo comercialmente.
+F. STREAMING / PUSH: no implementados. Requieren proveedor e integración; no hay botón que simule que funcionan.
+G. ADMINISTRADOR EN VIDEO: no implementado. La versión no permite observar cámaras de forma oculta. Una futura entrada visible de moderador requiere invitación, aceptación de participantes y una conexión multiparte.
+H. DOCUMENTOS: almacenamiento privado; revisión humana sin reconocimiento facial automático. La eliminación tras revisión es MANUAL desde Identidades según el plazo configurado; no existe aún borrado programado. No subas cédulas reales hasta validar el procedimiento completo.
+
+PERMISOS
+Gratis: perfiles y publicaciones públicas; sin chat privado.
+Premium: chat de texto y emojis, contenido Público y Premium; sin enviar ni recibir multimedia ni pedir video.
+Diamante: añade contenido Diamante, archivos y solicitudes de videollamada.
+Creadora: solo su perfil, contenido, conversaciones y solicitudes; no decide su verificación ni se concede un plan.
+Administrador: gestión global; revisión del chat con motivo, registro y notificación a participantes. No obtiene contraseñas ni acceso oculto a cámaras.
+Desarrollador: no se creó un rol con acceso general a datos personales. El panel de diagnóstico es del administrador; el trabajo técnico debe realizarse con cuentas de prueba y entorno separado.
+
+VALIDACIÓN
+Ver docs/VALIDACION.md para distinguir pruebas realizadas y comprobaciones que requieren el dominio real.

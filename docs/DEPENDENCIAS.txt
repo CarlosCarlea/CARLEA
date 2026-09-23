@@ -1,0 +1,4 @@
+Supabase JavaScript 2.57.4 (UMD), licencia MIT. Fuente: https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js
+SHA256: 7e94b62086deecef8c0ba3b38f514e2a1944ff6c81d92fb3ff967828c406c38f
+Inter variable 5.2.5, SIL Open Font License; licencia incluida en assets/fonts/LICENSE.txt.
+Sin compilación ni dependencias descargadas por el navegador.
