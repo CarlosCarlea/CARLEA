@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#101011" />
+    <title>CARLÉA · Vinculación de experiencias</title>
+    <meta
+      name="description"
+      content="Descubre creadoras, conversaciones y experiencias en CARLÉA."
+    />
+    <link rel="icon" href="assets/logo.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="gate" class="gate">
+      <section class="gate-card">
+        <img
+          class="gate-logo"
+          src="assets/logo.png"
+          alt="CARLÉA · Vinculación de experiencias"
+        />
+        <div class="eyebrow">UN ESPACIO PARA MAYORES DE EDAD</div>
+        <h1>Tu próxima conexión<br />empieza aquí.</h1>
+        <p class="muted">
+          Antes de explorar, conoce cómo cuidamos tus datos y las reglas de
+          nuestra comunidad.
+        </p>
+        <label class="check"
+          ><input id="age" type="checkbox" />Confirmo que tengo 18 años o
+          más.</label
+        ><label class="check"
+          ><input id="consent" type="checkbox" /><span
+            >He leído los
+            <button class="text" data-legal="terms">términos</button> y autorizo
+            el tratamiento descrito en la
+            <button class="text" data-legal="privacy">
+              política de privacidad</button
+            >.</span
+          ></label
+        ><button id="enter" class="primary full" disabled>
+          Aceptar y explorar ↗</button
+        ><button id="creatorJoin" class="creator-cta full">¿Eres creadora? Suscríbete aquí</button><button id="exit" class="text full">Salir</button>
+        <p class="small muted">
+          La autorización comercial es opcional y se solicita por separado.
+          Versión 3.4.
+        </p>
+      </section>
+    </div>
+    <div id="shell" inert>
+      <aside>
+        <a class="brand" href="#home" aria-label="CARLÉA inicio"
+          ><img src="assets/logo.png" alt="CARLÉA"
+        /></a>
+        <nav id="nav"></nav>
+        <div class="aside-bottom">
+          <span class="eyebrow">VINCULACIÓN DE EXPERIENCIAS</span
+          ><button class="text" data-legal="privacy">Privacidad</button
+          ><button class="text" data-legal="terms">Términos</button
+          ><span class="small muted">CARLÉA · Revisión 3.4.0</span>
+        </div>
+      </aside>
+      <div class="main-shell">
+        <header>
+          <div class="row">
+            <img
+              class="mobile-logo"
+              src="assets/logo.png"
+              alt="Logo CARLÉA"
+            /><span id="breadcrumb">Descubrir</span>
+          </div>
+          <div class="header-actions">
+            <span id="identity" class="small"></span
+            ><button id="access">Ingresar</button>
+          </div>
+        </header>
+        <main id="main" tabindex="-1"><p>Cargando…</p></main>
+      </div>
+    </div>
+    <dialog id="dialog">
+      <button id="closeDialog" class="close" aria-label="Cerrar">×</button>
+      <div id="dialogBody"></div>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script src="js/supabase-2.57.4.js"></script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
