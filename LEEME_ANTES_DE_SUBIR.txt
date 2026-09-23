@@ -1,0 +1,45 @@
+CARLÉA 3.4.0 — ACTUALIZACIÓN INTEGRAL
+22 de septiembre de 2026
+
+BASE
+Esta versión parte de CARLÉA 3.3.2 Cloudflare Directo. No reconstruye el proyecto y mantiene Supabase directo como fuente de verdad.
+
+IMPORTANTE
+1. NO publiques primero el frontend nuevo contra la base vieja.
+2. Aplica primero la migración 3.4 en un proyecto Supabase de STAGING:
+   supabase/migrations/20260922123000_integral_carlea_3_4.sql
+3. Verifica que la migración termine completa, sin errores.
+4. Configura Authentication > URL Configuration y SMTP de producción.
+5. Configura los secretos del Worker en Cloudflare para las operaciones administrativas sensibles:
+   - SUPABASE_ANON_KEY
+   - SUPABASE_SERVICE_ROLE_KEY
+   La service_role se guarda SOLO como secreto del backend/Worker. Nunca debe estar en frontend.
+6. Publica después TODO el contenido del paquete en Cloudflare Pages.
+7. Haz las pruebas de aceptación indicadas en GUIA_DESPLIEGUE_CLOUDFLARE.md.
+
+LOGO
+assets/logo.png es el recurso oficial y no fue modificado.
+
+PAGOS
+Los pagos de esta versión siguen siendo MANUALES. Una solicitud PENDIENTE no habilita Premium, Diamond, membresía de creadora, videollamada ni experiencia pagada.
+
+VIDEOLLAMADAS
+30 min: $49.900 COP
+60 min: $79.900 COP — Recomendado
+90 min: $99.900 COP — Mejor valor
+Distribución: 80% creadora / 20% CARLÉA.
+
+EXPERIENCIAS
+No se inventó una comisión para CARLÉA porque el requerimiento no fija porcentaje. El ledger usa 0 de comisión para experiencias hasta definir esa regla comercial.
+
+LEGAL
+Los textos y controles técnicos ayudan a implementar el flujo previsto, pero deben recibir revisión jurídica profesional antes del lanzamiento comercial en producción.
+
+PRUEBAS LOCALES EJECUTADAS
+- Arquitectura 3.4: PASS
+- Funciones integrales 3.4: 5/5 PASS
+- Membresías: 7/7 PASS
+- Cloudflare Worker/proxy heredado: 5/5 PASS
+- Sintaxis JavaScript/Worker: PASS
+
+NO SE MEZCLÓ CARLÉA CON SENDA/AMILECAP.
