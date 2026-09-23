@@ -1,0 +1,28 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+const read=(p)=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
+const app=read("js/app.js"),chat=read("js/chat.js"),video=read("js/video.js"),html=read("index.html"),css=read("styles.css"),api=read("js/api.js"),config=read("js/config.js"),worker=read("_worker.js"),baseSql=read("supabase/migrations/20260921161704_membership_entitlements_review.sql"),sql=read("supabase/migrations/20260922123000_integral_carlea_3_4.sql");
+for(const old of ["platform_plans","platform_subscriptions","registration_details","request_global_subscription"])assert.ok(!app.includes(old),"Obsolete frontend dependency: "+old);
+for(const live of ["client_subscriptions","get_my_entitlements","request_client_membership","cancel_client_membership"])assert.ok(app.includes(live),"Missing compatible subscription integration: "+live);
+for(const fn of ["loadAccount","landingForProfile","saveConsent","loadCatalog","home","creatorPage","plansPage","login","register","profilePage","passwordDialog","applyIdentity","studio","notifications","admin","experiences","agenda","earnings","legal","route"])assert.match(app,new RegExp("function "+fn+"\\("),"Existing/new function missing: "+fn);
+for(const marker of ['id="gate"','id="age"','id="consent"','id="creatorJoin"','assets/logo.png'])assert.ok(html.includes(marker),"Missing HTML marker "+marker);
+assert.equal((html.match(/assets\/logo\.png/g)||[]).length>=2,true,"Official logo file is not reused");
+for(const rpc of ["list_ranked_creators","creator_content_manifest","submit_creator_application","creator_resubmit_content","creator_toggle_experience","request_experience_scheduled","complete_experience_request","notification_bulk_action","admin_review_payment","admin_metrics"])assert.ok(app.includes(rpc),"Missing 3.4 app integration: "+rpc);
+for(const rpc of ["mark_conversation_read","admin_enter_chat","admin_enable_chat_intervention","admin_send_moderation_message","request_video_call_purchase","creator_respond_video_call","start_video_call","finish_video_call"])assert.ok(chat.includes(rpc),"Missing 3.4 chat integration: "+rpc);
+for(const capability of ["canSendText","canSendMedia","canSendAudio","canRequestVideoCall"])assert.ok(chat.includes(capability),"Missing capability guard: "+capability);
+assert.ok(chat.includes("99+")&&chat.includes("escribiendo")&&chat.includes("Presence")===false); // presence API is used, without fake labels
+assert.ok(chat.includes('.on("presence"'),"Supabase Presence typing integration missing");
+assert.ok(video.includes("Tiempo restante")&&video.includes("Quedan 5 minutos")&&video.includes("finish_video_call"),"Timed video flow missing");
+for(const table of ["creator_activity","creator_availability","payment_requests","financial_ledger","creator_memberships","moderation_alerts","chat_moderation_sessions"])assert.ok(sql.includes(`create table if not exists public.${table}`),"Missing additive table: "+table);
+for(const rpc of ["list_ranked_creators","external_contact_alert","notification_bulk_action","submit_creator_application","request_video_call_purchase","admin_review_payment","creator_earnings_summary","admin_prepare_account_removal"])assert.ok(sql.includes(rpc),"Missing migration function: "+rpc);
+assert.ok(sql.includes("0.20")&&sql.includes("creator_net_cop"),"80/20 video split not persisted");
+assert.ok(sql.includes("39900")&&sql.includes("creator_membership"),"Creator membership rule missing");
+assert.ok(sql.includes("message_kind")&&sql.includes("Moderación CARLÉA"),"Moderation identity/audit flow missing");
+assert.ok(sql.includes("whats?app")&&sql.includes("telegram")&&sql.includes("phone_pattern"),"External-contact detector missing");
+assert.ok(css.includes("fuego azul abstracto")&&css.includes("--blue")&&css.includes("locked-preview"),"Blue premium visual layer missing");
+assert.ok(worker.includes("SUPABASE_SERVICE_ROLE_KEY")&&worker.includes("/api/admin/delete-account")&&worker.includes("admin_prepare_account_removal"),"Secure backend deletion route missing");
+assert.ok(!config.includes("service_role")&&!api.includes("service_role"),"Service role exposed in frontend");
+assert.ok(config.includes('"proxy": false'),"Direct Supabase connection fix regressed");
+assert.ok(baseSql.includes("enable row level security")&&sql.includes("enable row level security"),"RLS safeguards missing");
+assert.ok(sql.startsWith("-- CARLÉA 3.4.0")&&sql.includes("begin;")&&sql.trimEnd().endsWith("commit;"),"Migration transaction boundary missing");
+console.log("PASS: CARLÉA 3.4 static architecture, security and preservation checks.");
